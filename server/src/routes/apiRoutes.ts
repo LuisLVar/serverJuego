@@ -10,12 +10,12 @@ class ApiRoutes{
     }
 
     config():void {
-        this.router.get('/newJuego', apiController.newJuego);
-        this.router.get('/newMovimiento', apiController.newMovimiento);
+        this.router.post('/newJuego', apiController.newJuego);
+        this.router.post('/newMovimiento', apiController.newMovimiento);
         this.router.get('/dataJuegos', apiController.dataJuegos);
         this.router.get('/dataMovimientos', apiController.dataMovimientos);
         this.router.get('/getJuego', apiController.getJuego);
-        this.router.get('/finJuego', apiController.finJuego);
+        this.router.post('/finJuego', apiController.finJuego);
     }
 
 }

@@ -8,12 +8,12 @@ class ApiRoutes {
         this.config();
     }
     config() {
-        this.router.get('/newJuego', apiController_1.apiController.newJuego);
-        this.router.get('/newMovimiento', apiController_1.apiController.newMovimiento);
+        this.router.post('/newJuego', apiController_1.apiController.newJuego);
+        this.router.post('/newMovimiento', apiController_1.apiController.newMovimiento);
         this.router.get('/dataJuegos', apiController_1.apiController.dataJuegos);
         this.router.get('/dataMovimientos', apiController_1.apiController.dataMovimientos);
         this.router.get('/getJuego', apiController_1.apiController.getJuego);
-        this.router.get('/finJuego', apiController_1.apiController.finJuego);
+        this.router.post('/finJuego', apiController_1.apiController.finJuego);
     }
 }
 const apiRoutes = new ApiRoutes();
