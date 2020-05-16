@@ -41,6 +41,11 @@ class ApiController {
             punteo = ?
             WHERE juego = ?`, [req.body.tiempo, req.body.punteo, req.body.juego]);
             estadoJuego = false;
+            res.json({estado: estadoJuego});
+    }
+
+    public async getCola(req: Request, res: Response) {
+        res.json(colaJuegos);
     }
 
 }

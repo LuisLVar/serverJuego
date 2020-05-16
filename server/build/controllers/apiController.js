@@ -57,6 +57,12 @@ class ApiController {
             punteo = ?
             WHERE juego = ?`, [req.body.tiempo, req.body.punteo, req.body.juego]);
             estadoJuego = false;
+            res.json({ estado: estadoJuego });
+        });
+    }
+    getCola(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            res.json(colaJuegos);
         });
     }
 }

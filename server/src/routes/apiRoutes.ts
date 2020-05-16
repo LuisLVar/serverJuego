@@ -16,6 +16,7 @@ class ApiRoutes{
         this.router.get('/dataMovimientos', apiController.dataMovimientos);
         this.router.get('/getJuego', apiController.getJuego);
         this.router.post('/finJuego', apiController.finJuego);
+        this.router.get('/getCola', apiController.getCola);
     }
 
 }
