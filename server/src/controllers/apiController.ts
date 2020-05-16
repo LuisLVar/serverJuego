@@ -26,6 +26,12 @@ class ApiController {
         res.json(juegos);
     }
 
+    public async dataJuegoOne(req: Request, res: Response) {
+        const { id } = req.params;
+        const data = await pool.query(`SELECT * from Juego WHERE juego = ?`, [id]);
+        res.json(data);
+    }
+
     public async dataMovimientos(req: Request, res: Response) {
         let movimientos = await pool.query(`SELECT * from Movimiento`);
         res.json(movimientos);
@@ -41,7 +47,7 @@ class ApiController {
             punteo = ?
             WHERE juego = ?`, [req.body.tiempo, req.body.punteo, req.body.juego]);
             estadoJuego = false;
-            res.json({estado: estadoJuego});
+            res.json({estado: true});
     }
 
     public async getCola(req: Request, res: Response) {

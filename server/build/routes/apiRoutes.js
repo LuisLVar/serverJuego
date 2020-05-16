@@ -15,6 +15,7 @@ class ApiRoutes {
         this.router.get('/getJuego', apiController_1.apiController.getJuego);
         this.router.post('/finJuego', apiController_1.apiController.finJuego);
         this.router.get('/getCola', apiController_1.apiController.getCola);
+        this.router.get('/dataJuegos/:id', apiController_1.apiController.dataJuegoOne);
     }
 }
 const apiRoutes = new ApiRoutes();

@@ -39,6 +39,13 @@ class ApiController {
             res.json(juegos);
         });
     }
+    dataJuegoOne(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const data = yield database_1.default.query(`SELECT * from Juego WHERE juego = ?`, [id]);
+            res.json(data);
+        });
+    }
     dataMovimientos(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let movimientos = yield database_1.default.query(`SELECT * from Movimiento`);
@@ -57,7 +64,7 @@ class ApiController {
             punteo = ?
             WHERE juego = ?`, [req.body.tiempo, req.body.punteo, req.body.juego]);
             estadoJuego = false;
-            res.json({ estado: estadoJuego });
+            res.json({ estado: true });
         });
     }
     getCola(req, res) {
