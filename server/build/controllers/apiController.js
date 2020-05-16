@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
 var colaJuegos = [];
-//const IP: any = 'http://localhost:8080';
+const IP = 'http://localhost:8080';
 var estadoJuego = false;
 class ApiController {
     newJuego(req, res) {
@@ -30,6 +30,18 @@ class ApiController {
     newMovimiento(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             yield database_1.default.query(`INSERT INTO Movimiento (juego_Juego, tipo_Tipo) VALUES(?, ?)`, [req.body.juego, req.body.tipo]);
+            const axios = require('axios');
+            axios.post(IP + "/moverse", {
+                juego: req.body.juego,
+                direccion: req.body.tipo
+            })
+                .then((resp) => {
+                console.log(`statusCode: ${res.statusCode}`);
+                //console.log(resp)
+            })
+                .catch((error) => {
+                console.error(error);
+            });
             res.json({ estado: estadoJuego });
         });
     }
