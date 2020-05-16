@@ -11,6 +11,19 @@ class ApiController {
         await pool.query(`INSERT INTO Juego (jugador) VALUES(?)`, [req.body.jugador]);
         let juego = await pool.query(`SELECT juego from Juego ORDER BY juego desc LIMIT 1`);
         let juegoActual = juego[0].juego;
+        
+        const axios = require('axios')
+        axios.post(IP + "/reiniciar", {
+            juego: juegoActual
+        })
+            .then((resp: any) => {
+                console.log(`statusCode: ${res.statusCode}`)
+                //console.log(resp)
+            })
+            .catch((error: any) => {
+                console.error(error)
+            });
+        
         colaJuegos.push({ juego: juegoActual });
         estadoJuego = true;
         res.json({ juego: juegoActual });
