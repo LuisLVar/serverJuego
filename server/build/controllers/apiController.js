@@ -105,7 +105,8 @@ class ApiController {
             movAbajo = ?,
             movDer = ?,
             movIzq = ?
-            WHERE juego = ?`, [req.body.tiempo, req.body.punteo, req.body.juego, req.body.enemigos,]);
+            WHERE juego = ?`, [req.body.tiempo, req.body.punteo, req.body.enemigos, req.body.enemigos1, req.body.enemigos2,
+                req.body.enemigos3, req.body.movArriba, req.body.movAbajo, req.body.movDer, req.body.movIzq, req.body.juego]);
             estadoJuego = 0;
             res.json({ estado: true });
         });
