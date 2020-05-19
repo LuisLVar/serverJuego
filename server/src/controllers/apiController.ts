@@ -8,7 +8,16 @@ var estadoJuego: any = false;
 class ApiController {
 
     public async newJuego(req: Request, res: Response) {
-        await pool.query(`INSERT INTO Juego (jugador) VALUES(?)`, [req.body.jugador]);
+        var d = new Date();
+        var year = d.getFullYear();
+        var month = d.getMonth() + 1;
+        var dia = d.getDate();
+        var hour = d.getHours();
+        var minutes = d.getMinutes();
+        var seconds = d.getSeconds();
+
+        var fecha = year + "-" + month + "-" + dia + " " + hour + ":" + minutes + ":" + seconds;
+        await pool.query(`INSERT INTO Juego (jugador, fecha) VALUES(?, ?)`, [req.body.jugador, fecha]);
         let juego = await pool.query(`SELECT juego from Juego ORDER BY juego desc LIMIT 1`);
         let juegoActual = juego[0].juego;
         
@@ -48,13 +57,17 @@ class ApiController {
     }
 
     public async dataJuegos(req: Request, res: Response) {
-        let juegos = await pool.query(`SELECT * from Juego`);
+        let juegos = await pool.query(`SELECT juego, jugador, tiempo, enemigos, enemigos1, enemigos2, enemigos3, movArriba,
+        movAbajo, movDer, movIzq, punteo, date_format(fecha, '%d-%m-%Y %H:%i:%s') as fecha,
+         date_format(fecha, '%d-%m-%Y') as fecha2 FROM Juego`);
         res.json(juegos);
     }
 
     public async dataJuegoOne(req: Request, res: Response) {
         const { id } = req.params;
-        const data = await pool.query(`SELECT * from Juego WHERE juego = ?`, [id]);
+        const data = await pool.query(`SELECT juego, jugador, tiempo, enemigos, enemigos1, enemigos2, enemigos3, movArriba,
+        movAbajo, movDer, movIzq, punteo, date_format(fecha, '%d-%m-%Y %H:%i:%s') as fecha,
+         date_format(fecha, '%d-%m-%Y') as fecha2 FROM Juego WHERE juego = ?`, [id]);
         res.json(data);
     }
 
@@ -70,11 +83,20 @@ class ApiController {
     public async finJuego(req: Request, res: Response) {
         await pool.query(`UPDATE Juego SET
             tiempo = ?,
-            punteo = ?
-            WHERE juego = ?`, [req.body.tiempo, req.body.punteo, req.body.juego]);
+            punteo = ?,
+            enemigos = ?,
+            enemigos1 = ?,
+            enemigos2 = ?,
+            enemigos3 = ?,
+            movArriba = ?,
+            movAbajo = ?,
+            movDer = ?,
+            movIzq = ?
+            WHERE juego = ?`, [req.body.tiempo, req.body.punteo, req.body.juego, req.body.enemigos, ]);
         estadoJuego = false;
         res.json({ estado: true });
     }
+
 
     public async getCola(req: Request, res: Response) {
         res.json(colaJuegos);
