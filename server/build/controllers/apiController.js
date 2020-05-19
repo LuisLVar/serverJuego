@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
 var colaJuegos = [];
 const IP = 'http://localhost:8080';
-var estadoJuego = false;
+var estadoJuego = 0;
 class ApiController {
     newJuego(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -42,7 +42,7 @@ class ApiController {
                 console.error(error);
             });
             colaJuegos.push({ juego: juegoActual });
-            estadoJuego = true;
+            estadoJuego = 1;
             res.json({ juego: juegoActual });
         });
     }
@@ -106,7 +106,7 @@ class ApiController {
             movDer = ?,
             movIzq = ?
             WHERE juego = ?`, [req.body.tiempo, req.body.punteo, req.body.juego, req.body.enemigos,]);
-            estadoJuego = false;
+            estadoJuego = 0;
             res.json({ estado: true });
         });
     }

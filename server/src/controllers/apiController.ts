@@ -3,7 +3,7 @@ import pool from '../database';
 
 var colaJuegos: any[] = [];
 const IP: any = 'http://localhost:8080';
-var estadoJuego: any = false;
+var estadoJuego: any = 0;
 
 class ApiController {
 
@@ -34,7 +34,7 @@ class ApiController {
             });
         
         colaJuegos.push({ juego: juegoActual });
-        estadoJuego = true;
+        estadoJuego = 1;
         res.json({ juego: juegoActual });
     }
 
@@ -93,7 +93,7 @@ class ApiController {
             movDer = ?,
             movIzq = ?
             WHERE juego = ?`, [req.body.tiempo, req.body.punteo, req.body.juego, req.body.enemigos, ]);
-        estadoJuego = false;
+        estadoJuego = 0;
         res.json({ estado: true });
     }
 
